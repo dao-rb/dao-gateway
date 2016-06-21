@@ -22,6 +22,12 @@ describe Dao::Gateway::Base do
     end
   end
 
+  describe '#delete' do
+    it 'should raise error' do
+      expect { subject.delete(double) }.to raise_error 'delete is not implemented'
+    end
+  end
+
   describe '#chain' do
     it 'should raise error' do
       expect { subject.chain(double, double, double) }.to raise_error 'chain is not implemented'

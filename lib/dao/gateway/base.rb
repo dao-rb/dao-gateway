@@ -18,6 +18,10 @@ module Dao
         fail 'save! is not implemented'
       end
 
+      def delete(_domain_id)
+        fail 'delete is not implemented'
+      end
+
       def chain(_scope, _method_name, _args, &_block)
         fail 'chain is not implemented'
       end
