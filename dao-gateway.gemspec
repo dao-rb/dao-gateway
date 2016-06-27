@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['llxff', 'ssnikolay']
   spec.email         = ['ll.wg.bin@gmail.com']
 
-  spec.summary       = 'Base gateway intergace for dao-rb/repository'
-  spec.description   = 'Base gateway intergace for dao-rb/repository'
+  spec.summary       = 'Base gateway interface for dao-rb/repository'
+  spec.description   = 'Base gateway interface for dao-rb/repository'
   spec.homepage      = 'https://github.com/dao-rb/dao-gateway'
   spec.license       = 'MIT'
 
