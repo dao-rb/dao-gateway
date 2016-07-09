@@ -1,5 +1,6 @@
 # Dao::Gateway
 
+[![Gem Version](https://badge.fury.io/rb/dao-gateway.svg)](https://badge.fury.io/rb/dao-gateway)
 [![Build Status](https://travis-ci.org/dao-rb/dao-gateway.svg?branch=master)](https://travis-ci.org/dao-rb/dao-gateway)
 [![Code Climate](https://codeclimate.com/github/dao-rb/dao-gateway/badges/gpa.svg)](https://codeclimate.com/github/dao-rb/dao-gateway)
 [![Test Coverage](https://codeclimate.com/repos/5772c7717be4200075002276/badges/7a1a924db7afcf9ed068/coverage.svg)](https://codeclimate.com/repos/5772c7717be4200075002276/coverage)
