@@ -28,13 +28,10 @@ module Dao
       protected
 
       def transform(relation, &block)
-        Enumerator.new do |collection|
-          entities = relation
-          entities = relation.collect(&block) if block_given?
-          entities.each do |attributes|
-            collection << @entity.new(attributes).tap do |entity|
-              entity.initialized_with = associations
-            end
+        relation.collect do |attributes|
+          attributes = block.call(attributes) if block_given?
+          @entity.new(attributes).tap do |entity|
+            entity.initialized_with = associations
           end
         end
       end
