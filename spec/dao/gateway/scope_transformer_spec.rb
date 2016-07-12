@@ -9,7 +9,7 @@ describe Dao::Gateway::ScopeTransformer do
   describe '#many' do
     subject { transformer.many([1,2]) }
 
-    it { is_expected.to be_a Enumerator }
+    it { is_expected.to be_a Array }
     its(:count) { is_expected.to eq 2 }
     its(:to_a) { is_expected.to include instance_of(entity) }
 
