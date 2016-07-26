@@ -1,12 +1,13 @@
 module Dao
   module Gateway
     class ScopeTransformer
-      attr_reader :entity
       attr_accessor :associations
 
       def initialize(entity)
-        @entity = entity
         @associations = []
+        @processors = [Dao::Gateway::EntityProcessor.new(entity)]
+
+        add_processors
       end
 
       def many(relation)
@@ -27,13 +28,12 @@ module Dao
 
       protected
 
-      def transform(relation, &block)
-        relation.collect do |attributes|
-          attributes = block.call(attributes) if block_given?
-          @entity.new(attributes).tap do |entity|
-            entity.initialized_with = associations
-          end
-        end
+      def transform(relation)
+        Pipe.new(relation, @processors, @associations)
+      end
+
+      def add_processors
+
       end
     end
   end
