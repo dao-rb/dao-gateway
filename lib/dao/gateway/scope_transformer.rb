@@ -1,10 +1,12 @@
 module Dao
   module Gateway
     class ScopeTransformer
+      attr_reader :entity
       attr_accessor :associations
 
       def initialize(entity)
         @associations = []
+        @entity = entity
         @processors = [Dao::Gateway::EntityProcessor.new(entity)]
 
         add_processors
