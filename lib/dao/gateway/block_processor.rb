@@ -1,25 +1,29 @@
 module Dao
   module Gateway
     class BlockProcessor < Processor
-      def initialize(continuable = true, &block)
-        @continuable = continuable
+      def initialize(need_to_continue_lookup = true, &block)
+        @original_need_to_continue_lookup = need_to_continue_lookup
         @processor = block
       end
 
-      def process(*args)
-        @processor.call(*args, self)
+      def prepared
+        @need_to_continue_lookup = @original_need_to_continue_lookup
       end
 
-      def continuable?
-        @continuable
+      def need_to_continue_lookup?
+        @need_to_continue_lookup
       end
 
-      def continuable!
-        @continuable = true
+      def process(entity)
+        @processor.call(entity, @associations, @raw_record, self)
+      end
+
+      def need_to_continue_lookup!
+        @need_to_continue_lookup = true
       end
 
       def stop!
-        @continuable = false
+        @need_to_continue_lookup = false
       end
     end
   end

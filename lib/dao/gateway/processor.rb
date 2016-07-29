@@ -1,12 +1,24 @@
 module Dao
   module Gateway
     class Processor
-      def process(attributes, _associations, _raw_record)
+      def prepare(associations, raw_record)
+        @associations = associations
+        @raw_record = raw_record
+        prepared
+      end
+
+      def process(attributes)
         attributes
       end
 
-      def continuable?
+      def need_to_continue_lookup?
         true
+      end
+
+      protected
+
+      def prepared
+
       end
     end
   end

@@ -5,9 +5,9 @@ module Dao
         @entity_class = entity_class
       end
 
-      def process(attributes, associations, *)
+      def process(attributes)
         @entity_class.new(attributes).tap do |entity|
-          entity.initialized_with = associations
+          entity.initialized_with = @associations
         end
       end
     end

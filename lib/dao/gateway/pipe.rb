@@ -3,19 +3,16 @@ module Dao
     class Pipe
       include Enumerable
 
-      def initialize(data, processors, associations)
-        @data = data
-        @processors = processors
-        @associations = associations
-        @data_processed = false
+      def initialize
+        @processors = []
       end
 
       def postprocess(processor)
-        @processors << processor
+        @processors.unshift(processor)
       end
 
       def preprocess(processor)
-        insert_processor_at(0, processor)
+        @processors << processor
       end
 
       def insert_processor_at(index, processor)
@@ -27,47 +24,22 @@ module Dao
         insert_processor_at(index, processor)
       end
 
-      def processed?
-        @data_processed
-      end
-
-      def each(&block)
-        if processed?
-          @data.each(&block)
-        else
-          process_data(&block)
-        end
-      end
-
-      def fork
-        raise 'Data was already processed' if processed?
-        fork!
-      end
-
-      def fork!
-        self.class.new(@data.dup, @processors.dup, @associations)
-      end
-
-      private
-
-      def process_data(&block)
+      def process(raw_element, associations)
         @data_processed = true
-        result = []
 
-        @data.each_with_index do |raw_element, index|
-          entity = raw_element
+        processors = []
 
-          @processors.all? do |processor|
-            entity = processor.process(entity, @associations, raw_element)
-            processor.continuable?
-          end
+        @processors.all? do |processor|
+          processor.prepare(associations, raw_element)
 
-          result[index] = entity
+          processors.unshift(processor)
 
-          block.call(entity)
+          processor.need_to_continue_lookup?
         end
 
-        @data = result
+        processors.inject(raw_element) do |entity, processor|
+          processor.process(entity)
+        end
       end
     end
   end

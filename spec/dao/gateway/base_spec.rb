@@ -1,7 +1,7 @@
 describe Dao::Gateway::Base do
   let(:entity) { Struct.new(:attribute, :initialized_with) }
   let(:transformer) { Dao::Gateway::ScopeTransformer.new(entity) }
-  let(:source) { double }
+  let(:source) { Object }
   let(:gateway) { described_class.new(source, transformer) }
 
   subject { gateway }
@@ -12,7 +12,7 @@ describe Dao::Gateway::Base do
 
   describe '#map' do
     it 'should raise error' do
-      expect { subject.map(double, double) }.to raise_error 'import is not implemented'
+      expect(subject.map(1, double).attribute).to eq 1
     end
   end
 

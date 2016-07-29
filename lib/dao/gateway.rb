@@ -7,6 +7,7 @@ require 'dao/gateway/processor'
 require 'dao/gateway/entity_processor'
 require 'dao/gateway/block_processor'
 require 'dao/gateway/pipe'
+require 'dao/gateway/iterator'
 
 require 'dao/gateway/scope_transformer'
 require 'dao/gateway/base'
