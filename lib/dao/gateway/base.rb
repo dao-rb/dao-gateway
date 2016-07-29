@@ -44,8 +44,26 @@ module Dao
         fail 'export is not implemented'
       end
 
-      def import(_relation, _associations)
-        fail 'import is not implemented'
+      def import(relation, associations)
+        @transformer.associations = associations
+
+        unless relation.nil?
+          if source_scope?(relation)
+            @transformer.one(relation)
+          elsif collection_scope?(relation)
+            @transformer.many(relation)
+          else
+            @transformer.other(relation)
+          end
+        end
+      end
+
+      def collection_scope?(relation)
+        relation.respond_to? :each
+      end
+
+      def source_scope?(relation)
+        relation.is_a?(source)
       end
 
       def record(_domain_id)
