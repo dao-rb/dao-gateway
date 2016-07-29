@@ -52,6 +52,7 @@ module Dao
 
       def process_data(&block)
         @data_processed = true
+        result = []
 
         @data.each_with_index do |raw_element, index|
           entity = raw_element
@@ -61,10 +62,12 @@ module Dao
             processor.continuable?
           end
 
-          @data[index] = entity
+          result[index] = entity
 
           block.call(entity)
         end
+
+        @data = result
       end
     end
   end
