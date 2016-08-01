@@ -3,8 +3,14 @@ module Dao
     class Pipe
       include Enumerable
 
+      attr_reader :processors
+
       def initialize
         @processors = []
+      end
+
+      def initialize_copy(originial_pipe)
+        @processors = originial_pipe.processors.dup
       end
 
       def postprocess(processor)
