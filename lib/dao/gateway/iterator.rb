@@ -16,6 +16,12 @@ module Dao
         @data_processed
       end
 
+      def length
+        @data.length
+      end
+
+      alias :size :length
+
       def each(&block)
         if processed?
           @data.each(&block)
