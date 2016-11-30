@@ -26,7 +26,7 @@ module Dao
         fail 'chain is not implemented'
       end
 
-      def add_relations(scope, _relations)
+      def add_relations(scope, _relations, _options)
         scope
       end
 
