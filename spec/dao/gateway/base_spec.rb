@@ -38,7 +38,7 @@ describe Dao::Gateway::Base do
     let(:scope) { double }
 
     it 'should return scope' do
-      expect(subject.add_relations(scope, double)).to eq scope
+      expect(subject.add_relations(scope, double, {})).to eq scope
     end
   end
 
