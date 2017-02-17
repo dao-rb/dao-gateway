@@ -34,7 +34,7 @@ module Dao
         raise TransactionNotSupported
       end
 
-      def with_lock(_id)
+      def with_lock(_id, &_block)
         raise LockNotSupported
       end
 
