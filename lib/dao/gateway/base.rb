@@ -34,6 +34,10 @@ module Dao
         raise TransactionNotSupported
       end
 
+      def with_lock(_id)
+        raise LockNotSupported
+      end
+
       def serializable_relations(relations)
         convert_array(relations)
       end
